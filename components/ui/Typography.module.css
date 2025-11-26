@@ -1,0 +1,161 @@
+/* Headings */
+.heading {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1.2;
+  margin-bottom: var(--spacing-md);
+}
+
+.h1 {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  letter-spacing: -0.02em;
+}
+
+.h2 {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  letter-spacing: -0.015em;
+}
+
+.h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  letter-spacing: -0.01em;
+}
+
+.h4 {
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+}
+
+.h5 {
+  font-size: 1.125rem;
+}
+
+.h6 {
+  font-size: 1rem;
+}
+
+/* Text variants */
+.text {
+  font-family: var(--font-body);
+  line-height: 1.7;
+  margin-bottom: var(--spacing-sm);
+}
+
+.body {
+  font-size: 1rem;
+}
+
+.lead {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  font-weight: 400;
+}
+
+.small {
+  font-size: 0.875rem;
+}
+
+.caption {
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+/* Text colors */
+.color-primary {
+  color: var(--color-text-primary);
+}
+
+.color-secondary {
+  color: var(--color-text-secondary);
+}
+
+.color-light {
+  color: var(--color-text-light);
+}
+
+/* Text alignment */
+.align-left {
+  text-align: left;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.align-right {
+  text-align: right;
+}
+
+/* Display text - for hero sections */
+.display {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--spacing-lg);
+}
+
+.display-small {
+  font-size: clamp(3rem, 6vw, 4rem);
+}
+
+.display-medium {
+  font-size: clamp(4rem, 8vw, 5.5rem);
+}
+
+.display-large {
+  font-size: clamp(5rem, 10vw, 7rem);
+}
+
+.gradient {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+/* Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-radius: var(--radius-xl);
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: var(--shadow-sm);
+}
+
+.badge-primary {
+  background: var(--gradient-primary);
+  color: white;
+}
+
+.badge-secondary {
+  background: var(--gradient-accent);
+  color: var(--color-text-primary);
+}
+
+.badge-success {
+  background: var(--color-success);
+  color: white;
+}
+
+.badge-error {
+  background: var(--color-error);
+  color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .lead {
+    font-size: 1.125rem;
+  }
+
+  .text {
+    margin-bottom: var(--spacing-xs);
+  }
+}
