@@ -1,0 +1,9 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow admin/API routes if they exist
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://sydandeats.com/sitemap.xml

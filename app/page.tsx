@@ -18,9 +18,9 @@ function FloatingOrb({ top, left, size = 200, delay = 0 }: { top: string; left: 
         left,
         width: size,
         height: size,
-        opacity: 0.3,
+        opacity: 0.2,
         pointerEvents: 'none',
-        animation: `float ${8 + delay}s ease-in-out infinite`,
+        animation: `float ${10 + delay}s ease-in-out infinite`,
         animationDelay: `${delay}s`,
         zIndex: 0,
       }}
@@ -29,12 +29,12 @@ function FloatingOrb({ top, left, size = 200, delay = 0 }: { top: string; left: 
     >
       <defs>
         <linearGradient id={`grad-${delay}`} x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style={{ stopColor: '#fec89a', stopOpacity: 0.4 }} />
-          <stop offset="50%" style={{ stopColor: '#fec5bb', stopOpacity: 0.3 }} />
+          <stop offset="0%" style={{ stopColor: '#fec89a', stopOpacity: 0.3 }} />
+          <stop offset="50%" style={{ stopColor: '#fec5bb', stopOpacity: 0.25 }} />
           <stop offset="100%" style={{ stopColor: '#ffd7ba', stopOpacity: 0.2 }} />
         </linearGradient>
         <filter id={`blur-${delay}`}>
-          <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+          <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
         </filter>
       </defs>
       <path
@@ -88,7 +88,7 @@ function DecorativePattern() {
         left: 0,
         width: '100%',
         height: '100%',
-        opacity: 0.03,
+        opacity: 0.02,
         pointerEvents: 'none',
         zIndex: 0,
       }}
@@ -96,7 +96,7 @@ function DecorativePattern() {
     >
       <defs>
         <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-          <circle cx="20" cy="20" r="2" fill="#fec89a" />
+          <circle cx="20" cy="20" r="1.5" fill="#fec89a" />
         </pattern>
       </defs>
       <rect width="100%" height="100%" fill="url(#dots)" />
@@ -316,7 +316,7 @@ export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <Section background="default" padding="large" className="premium-texture" style={{ position: 'relative', overflow: 'hidden', paddingTop: '8rem', paddingBottom: '8rem' }}>
+      <Section background="default" padding="large" className="premium-texture" style={{ position: 'relative', overflow: 'hidden', paddingTop: '10rem', paddingBottom: '10rem', minHeight: '90vh', display: 'flex', alignItems: 'center' }}>
         <DecorativePattern />
         <FloatingOrb top="10%" left="5%" size={300} delay={0} />
         <FloatingOrb top="60%" left="80%" size={250} delay={2} />
@@ -327,27 +327,41 @@ export default function Home() {
 
         <Container size="medium">
           <div ref={heroRef} className="hero-content" style={{ textAlign: 'center', position: 'relative', zIndex: 2 }}>
-            <div style={{ marginBottom: '1.5rem' }}>
+            <div style={{ marginBottom: '2rem' }}>
               <Badge variant="secondary">Tel Aviv's Premier Food Concierge</Badge>
             </div>
-            <Display size="large" gradient style={{ marginBottom: '1.5rem', lineHeight: 1.1 }}>
+            <p style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '1.25rem', color: 'var(--color-text-primary)', letterSpacing: '0.02em' }}>
               Syd&amp;Eats
-            </Display>
+            </p>
+            <h1 style={{
+              fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
+              fontWeight: 700,
+              marginBottom: '1.75rem',
+              background: 'linear-gradient(135deg, #fec89a 0%, #fec5bb 50%, #ffd7ba 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              lineHeight: 1.15,
+              maxWidth: '900px',
+              margin: '0 auto 1.75rem'
+            }}>
+              Premium Food Concierge Service in Tel Aviv
+            </h1>
             <Text
               variant="lead"
               color="secondary"
               align="center"
               style={{
-                maxWidth: '600px',
-                margin: '0 auto 3rem',
-                fontSize: '1.375rem',
-                lineHeight: 1.6,
+                maxWidth: '640px',
+                margin: '0 auto 3.5rem',
+                fontSize: '1.25rem',
+                lineHeight: 1.7,
+                fontWeight: 400,
               }}
             >
               I'll book the restaurant, you show up hungry
             </Text>
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Button variant="outline" size="large">
+              <Button variant="secondary" size="large">
                 Get Started
               </Button>
               <Button variant="outline" size="large">
@@ -366,17 +380,17 @@ export default function Home() {
         padding="large"
         style={{
           position: 'relative',
-          paddingTop: '6rem',
-          paddingBottom: '6rem',
+          paddingTop: '8rem',
+          paddingBottom: '8rem',
           background: 'linear-gradient(180deg, #ffffff 0%, #fef9f8 100%)',
         }}
       >
         <Container size="medium">
-          <div style={{ textAlign: 'center', marginBottom: '4rem', maxWidth: '700px', margin: '0 auto 4rem' }}>
-            <Heading level={2} className="animate-on-scroll" style={{ fontSize: '3rem', marginBottom: '1rem' }}>
+          <div style={{ textAlign: 'center', marginBottom: '5rem', maxWidth: '720px', margin: '0 auto 5rem' }}>
+            <Heading level={2} className="animate-on-scroll" style={{ fontSize: 'clamp(2.25rem, 4vw, 2.75rem)', marginBottom: '1.25rem', fontWeight: 700 }}>
               What We Offer
             </Heading>
-            <Text variant="lead" color="secondary" align="center" className="animate-on-scroll stagger-1">
+            <Text variant="lead" color="secondary" align="center" className="animate-on-scroll stagger-1" style={{ fontSize: '1.125rem', lineHeight: 1.7 }}>
               Curated dining experiences crafted exclusively for discerning food enthusiasts
             </Text>
           </div>
@@ -388,21 +402,22 @@ export default function Home() {
                 hoverable
                 style={{
                   height: '100%',
-                  background: 'linear-gradient(135deg, #ffe5d9 0%, #fae1dd 100%)',
-                  border: 'none',
+                  background: '#ffffff',
+                  border: '1px solid var(--color-border-light)',
                   position: 'relative',
                   overflow: 'hidden',
+                  boxShadow: '0 4px 20px rgba(252, 213, 206, 0.12)',
                 }}
               >
                 <div style={{
                   position: 'absolute',
-                  top: '-50%',
-                  right: '-20%',
-                  width: '200px',
-                  height: '200px',
-                  background: 'radial-gradient(circle, rgba(254, 200, 154, 0.3) 0%, transparent 70%)',
+                  top: '-30%',
+                  right: '-15%',
+                  width: '160px',
+                  height: '160px',
+                  background: 'radial-gradient(circle, rgba(254, 200, 154, 0.15) 0%, transparent 70%)',
                   borderRadius: '50%',
-                  filter: 'blur(40px)',
+                  filter: 'blur(30px)',
                   pointerEvents: 'none',
                 }} />
                 <CardHeader
@@ -411,7 +426,7 @@ export default function Home() {
                   subtitle="Premium reservations"
                 />
                 <CardBody>
-                  <Text color="secondary" style={{ fontSize: '1.0625rem', lineHeight: 1.8 }}>
+                  <Text color="secondary" style={{ fontSize: '1rem', lineHeight: 1.7, color: 'var(--color-text-secondary)' }}>
                     Access to Tel Aviv's most exclusive restaurants. We handle the reservations, you enjoy the experience.
                   </Text>
                 </CardBody>
@@ -424,21 +439,22 @@ export default function Home() {
                 hoverable
                 style={{
                   height: '100%',
-                  background: 'linear-gradient(135deg, #fae1dd 0%, #f8edeb 100%)',
-                  border: 'none',
+                  background: '#ffffff',
+                  border: '1px solid var(--color-border-light)',
                   position: 'relative',
                   overflow: 'hidden',
+                  boxShadow: '0 4px 20px rgba(252, 213, 206, 0.12)',
                 }}
               >
                 <div style={{
                   position: 'absolute',
-                  top: '-50%',
-                  right: '-20%',
-                  width: '200px',
-                  height: '200px',
-                  background: 'radial-gradient(circle, rgba(254, 197, 187, 0.3) 0%, transparent 70%)',
+                  top: '-30%',
+                  right: '-15%',
+                  width: '160px',
+                  height: '160px',
+                  background: 'radial-gradient(circle, rgba(254, 197, 187, 0.15) 0%, transparent 70%)',
                   borderRadius: '50%',
-                  filter: 'blur(40px)',
+                  filter: 'blur(30px)',
                   pointerEvents: 'none',
                 }} />
                 <CardHeader
@@ -447,7 +463,7 @@ export default function Home() {
                   subtitle="Personalized recommendations"
                 />
                 <CardBody>
-                  <Text color="secondary" style={{ fontSize: '1.0625rem', lineHeight: 1.8 }}>
+                  <Text color="secondary" style={{ fontSize: '1rem', lineHeight: 1.7, color: 'var(--color-text-secondary)' }}>
                     Handpicked dining experiences tailored to your preferences and dietary requirements.
                   </Text>
                 </CardBody>
@@ -460,21 +476,22 @@ export default function Home() {
                 hoverable
                 style={{
                   height: '100%',
-                  background: 'linear-gradient(135deg, #f8edeb 0%, #ffe5d9 100%)',
-                  border: 'none',
+                  background: '#ffffff',
+                  border: '1px solid var(--color-border-light)',
                   position: 'relative',
                   overflow: 'hidden',
+                  boxShadow: '0 4px 20px rgba(252, 213, 206, 0.12)',
                 }}
               >
                 <div style={{
                   position: 'absolute',
-                  top: '-50%',
-                  right: '-20%',
-                  width: '200px',
-                  height: '200px',
-                  background: 'radial-gradient(circle, rgba(255, 215, 186, 0.3) 0%, transparent 70%)',
+                  top: '-30%',
+                  right: '-15%',
+                  width: '160px',
+                  height: '160px',
+                  background: 'radial-gradient(circle, rgba(255, 215, 186, 0.15) 0%, transparent 70%)',
                   borderRadius: '50%',
-                  filter: 'blur(40px)',
+                  filter: 'blur(30px)',
                   pointerEvents: 'none',
                 }} />
                 <CardHeader
@@ -483,7 +500,7 @@ export default function Home() {
                   subtitle="Exclusive access"
                 />
                 <CardBody>
-                  <Text color="secondary" style={{ fontSize: '1.0625rem', lineHeight: 1.8 }}>
+                  <Text color="secondary" style={{ fontSize: '1rem', lineHeight: 1.7, color: 'var(--color-text-secondary)' }}>
                     Skip the wait and enjoy priority seating at the city's hottest culinary destinations.
                   </Text>
                 </CardBody>
@@ -500,24 +517,24 @@ export default function Home() {
         className="premium-texture"
         style={{
           position: 'relative',
-          paddingTop: '6rem',
-          paddingBottom: '6rem',
+          paddingTop: '8rem',
+          paddingBottom: '8rem',
           overflow: 'hidden',
         }}
       >
         <FloatingOrb top="20%" left="85%" size={200} delay={1} />
         <Container size="medium">
           <Grid columns={2} gap="large" style={{ alignItems: 'center' }}>
-            <div className="animate-left" style={{ paddingRight: '2rem' }}>
-              <Heading level={2} style={{ fontSize: '2.75rem', marginBottom: '1.5rem', lineHeight: 1.2 }}>
+            <div className="animate-left" style={{ paddingRight: 'clamp(1rem, 3vw, 3rem)' }}>
+              <Heading level={2} style={{ fontSize: 'clamp(2rem, 4vw, 2.5rem)', marginBottom: '1.25rem', lineHeight: 1.25, fontWeight: 700 }}>
                 Why Choose Syd&amp;Eats?
               </Heading>
-              <Text color="secondary" style={{ fontSize: '1.125rem', lineHeight: 1.8, marginBottom: '2.5rem' }}>
+              <Text color="secondary" style={{ fontSize: '1.0625rem', lineHeight: 1.75, marginBottom: '3rem', color: 'var(--color-text-secondary)' }}>
                 Sydney Wolff brings years of culinary expertise and insider connections to ensure
                 your dining experiences are nothing short of extraordinary.
               </Text>
 
-              <List variant="feature" style={{ marginTop: '2rem' }}>
+              <List variant="feature" style={{ marginTop: '2.5rem' }}>
                 <div className="animate-left stagger-1">
                   <ListItem
                     icon="📱"
@@ -549,7 +566,7 @@ export default function Home() {
                 left: '-10%',
                 width: '120%',
                 height: '120%',
-                background: 'radial-gradient(circle, rgba(254, 200, 154, 0.1) 0%, transparent 70%)',
+                background: 'radial-gradient(circle, rgba(254, 200, 154, 0.08) 0%, transparent 70%)',
                 borderRadius: '50%',
                 filter: 'blur(60px)',
                 pointerEvents: 'none',
@@ -560,7 +577,8 @@ export default function Home() {
                 style={{
                   position: 'relative',
                   zIndex: 1,
-                  boxShadow: '0 20px 60px rgba(254, 200, 154, 0.25), 0 0 1px rgba(0,0,0,0.05)',
+                  boxShadow: '0 12px 48px rgba(254, 200, 154, 0.18), 0 0 1px rgba(0,0,0,0.05)',
+                  border: '1px solid var(--color-border-light)',
                 }}
               >
                 <CardHeader title="Book Your Experience" />
@@ -614,17 +632,17 @@ export default function Home() {
         padding="large"
         style={{
           background: 'linear-gradient(180deg, #fef9f8 0%, #ffffff 100%)',
-          paddingTop: '6rem',
-          paddingBottom: '6rem',
+          paddingTop: '8rem',
+          paddingBottom: '8rem',
           position: 'relative',
         }}
       >
         <Container size="small">
-          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <Heading level={2} className="animate-on-scroll" style={{ fontSize: '2.75rem', marginBottom: '1rem' }}>
+          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+            <Heading level={2} className="animate-on-scroll" style={{ fontSize: 'clamp(2.25rem, 4vw, 2.75rem)', marginBottom: '1.25rem', fontWeight: 700 }}>
               What You Get
             </Heading>
-            <Text variant="lead" color="secondary" align="center" className="animate-on-scroll stagger-1" style={{ maxWidth: '600px', margin: '0 auto' }}>
+            <Text variant="lead" color="secondary" align="center" className="animate-on-scroll stagger-1" style={{ maxWidth: '620px', margin: '0 auto', fontSize: '1.125rem', lineHeight: 1.7 }}>
               A comprehensive concierge service designed to elevate every dining moment
             </Text>
           </div>
@@ -634,8 +652,8 @@ export default function Home() {
             style={{
               background: 'white',
               borderRadius: 'var(--radius-xl)',
-              padding: '3rem',
-              boxShadow: '0 12px 40px rgba(252, 213, 206, 0.15)',
+              padding: 'clamp(2rem, 4vw, 3.5rem)',
+              boxShadow: '0 8px 32px rgba(252, 213, 206, 0.12)',
               border: '1px solid var(--color-border-light)',
             }}
           >
@@ -657,8 +675,8 @@ export default function Home() {
         padding="large"
         style={{
           background: 'linear-gradient(135deg, #fec89a 0%, #fec5bb 50%, #ffd7ba 100%)',
-          paddingTop: '6rem',
-          paddingBottom: '6rem',
+          paddingTop: '7rem',
+          paddingBottom: '7rem',
           position: 'relative',
           overflow: 'hidden',
         }}
@@ -670,7 +688,7 @@ export default function Home() {
           transform: 'translate(-50%, -50%)',
           width: '800px',
           height: '800px',
-          background: 'radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%)',
           borderRadius: '50%',
           filter: 'blur(80px)',
           pointerEvents: 'none',
@@ -678,7 +696,7 @@ export default function Home() {
 
         <Container size="small">
           <div style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
-            <Heading level={2} className="animate-on-scroll" style={{ color: 'white', fontSize: '3rem', marginBottom: '1.5rem', textShadow: '0 2px 20px rgba(0,0,0,0.1)' }}>
+            <Heading level={2} className="animate-on-scroll" style={{ color: 'white', fontSize: 'clamp(2.25rem, 4vw, 3rem)', marginBottom: '1.5rem', textShadow: '0 2px 20px rgba(0,0,0,0.1)', fontWeight: 700 }}>
               Ready to Elevate Your Dining?
             </Heading>
             <Text
@@ -686,10 +704,12 @@ export default function Home() {
               className="animate-on-scroll stagger-1"
               style={{
                 color: 'rgba(255, 255, 255, 0.95)',
-                marginBottom: '2.5rem',
-                fontSize: '1.25rem',
+                marginBottom: '3rem',
+                fontSize: '1.125rem',
                 lineHeight: 1.7,
                 textShadow: '0 1px 10px rgba(0,0,0,0.05)',
+                maxWidth: '640px',
+                margin: '0 auto 3rem',
               }}
             >
               Let Sydney Wolff handle the details while you focus on what matters—great food and
@@ -702,7 +722,8 @@ export default function Home() {
                 style={{
                   background: 'white',
                   color: 'var(--color-text-primary)',
-                  boxShadow: '0 12px 40px rgba(0,0,0,0.15)',
+                  boxShadow: '0 8px 32px rgba(0,0,0,0.15)',
+                  fontWeight: 600,
                 }}
               >
                 Start Your Journey
@@ -718,10 +739,10 @@ export default function Home() {
           <div style={{
             textAlign: 'center',
             borderTop: '1px solid var(--color-border)',
-            paddingTop: '2.5rem',
-            paddingBottom: '1rem',
+            paddingTop: '3rem',
+            paddingBottom: '2rem',
           }}>
-            <Text variant="small" color="light" style={{ fontSize: '0.9375rem' }}>
+            <Text variant="small" color="light" style={{ fontSize: '0.9375rem', lineHeight: 1.6 }}>
               © 2024 Syd&amp;Eats. Premium food concierge service in Tel Aviv, Israel.
             </Text>
           </div>
