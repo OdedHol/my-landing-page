@@ -1,60 +1,67 @@
 @import "tailwindcss";
 
 :root {
-  /* Premium Peachy Color Palette */
-  --color-powder-blush: #fec5bb;
-  --color-powder-blush-light: #fff3f1;
-  --color-powder-blush-dark: #fd7962;
+  /* Premium Terracotta & Gold Color Palette */
 
-  --color-almond-silk: #fcd5ce;
-  --color-almond-silk-light: #fef7f5;
-  --color-almond-silk-dark: #f68c79;
+  /* Primary - Terracotta (sophisticated, appetizing) */
+  --color-terracotta: #c45536;
+  --color-terracotta-light: #e8725a;
+  --color-terracotta-lighter: #fef0ed;
+  --color-terracotta-dark: #a43f28;
 
-  --color-soft-blush: #fae1dd;
-  --color-soft-blush-light: #fef9f8;
-  --color-soft-blush-dark: #ed978a;
+  /* Accent - Warm Gold (luxury, exclusivity) */
+  --color-gold: #d4a574;
+  --color-gold-light: #f5e5d3;
+  --color-gold-dark: #bf8f5f;
 
-  --color-seashell: #f8edeb;
-  --color-seashell-light: #fefcfb;
-  --color-seashell-dark: #dfada4;
+  /* Highlight - Refined Peach (decorative use only) */
+  --color-highlight: #f4c4a8;
+  --color-highlight-light: #fef5f0;
 
-  --color-alabaster-grey: #e8e8e4;
-  --color-alabaster-green: #d8e2dc;
+  /* Neutral Foundation */
+  --color-warm-white: #fdfbf9;
+  --color-surface-secondary: #f8f5f2;
+  --color-surface-tertiary: #f0ebe6;
 
-  --color-linen: #ece4db;
-  --color-linen-light: #fbfaf8;
-  --color-linen-dark: #ccb79f;
-
-  --color-powder-petal: #ffe5d9;
-  --color-powder-petal-light: #fffaf8;
-  --color-powder-petal-dark: #ffa67c;
-
-  --color-peach-fuzz: #ffd7ba;
-  --color-peach-fuzz-dark: #ffa260;
-
-  --color-peach-glow: #fec89a;
-  --color-peach-glow-dark: #fd9d49;
+  /* Borders */
+  --color-border-main: #e0d8d0;
+  --color-border-light: #ede8e3;
+  --color-border-dark: #c9bfb4;
 
   /* Semantic Colors */
-  --color-primary: #fec89a;
-  --color-primary-hover: #fd9d49;
-  --color-secondary: #fec5bb;
-  --color-secondary-hover: #fd7962;
-  --color-accent: #ffd7ba;
+  --color-primary: #c45536;
+  --color-primary-hover: #a43f28;
+  --color-primary-light: #e8725a;
+  --color-primary-lighter: #fef0ed;
 
-  --color-background: #fefcfb;
+  --color-secondary: #d4a574;
+  --color-secondary-hover: #bf8f5f;
+  --color-secondary-light: #f5e5d3;
+
+  --color-accent: #f4c4a8;
+  --color-accent-light: #fef5f0;
+
+  --color-background: #fdfbf9;
   --color-surface: #ffffff;
-  --color-surface-alt: #f8edeb;
+  --color-surface-alt: #f8f5f2;
 
-  --color-text-primary: #3b2e1f;
-  --color-text-secondary: #775d3f;
-  --color-text-light: #ad8b63;
+  --color-text-primary: #2a1f16;
+  --color-text-secondary: #5c4d3e;
+  --color-text-tertiary: #8b7869;
 
-  --color-border: #e8e8e4;
-  --color-border-light: #f8edeb;
+  --color-border: #e0d8d0;
+  --color-border-light: #ede8e3;
 
-  --color-success: #739781;
-  --color-error: #e14f38;
+  --color-success: #4a7c59;
+  --color-success-light: #e8f3ec;
+  --color-error: #c1412b;
+  --color-error-light: #fdecea;
+
+  /* RGB values for rgba() usage */
+  --color-primary-rgb: 196, 85, 54;
+  --color-secondary-rgb: 212, 165, 116;
+  --color-accent-rgb: 244, 196, 168;
+  --color-text-rgb: 42, 31, 22;
 
   /* Typography */
   --font-heading: 'Playfair Display', Georgia, serif;
@@ -74,24 +81,25 @@
   --radius-lg: 20px;
   --radius-xl: 30px;
 
-  /* Shadows */
-  --shadow-sm: 0 2px 12px rgba(252, 213, 206, 0.15);
-  --shadow-md: 0 6px 24px rgba(252, 213, 206, 0.20);
-  --shadow-lg: 0 12px 40px rgba(252, 213, 206, 0.25);
-  --shadow-xl: 0 20px 60px rgba(252, 213, 206, 0.30);
-  --shadow-peach: 0 8px 32px rgba(254, 200, 154, 0.3);
-  --shadow-blush: 0 8px 32px rgba(254, 197, 187, 0.3);
+  /* Shadows (neutral for better elevation) */
+  --shadow-sm: 0 2px 8px rgba(var(--color-text-rgb), 0.06);
+  --shadow-md: 0 4px 16px rgba(var(--color-text-rgb), 0.08);
+  --shadow-lg: 0 8px 24px rgba(var(--color-text-rgb), 0.10);
+  --shadow-xl: 0 12px 40px rgba(var(--color-text-rgb), 0.12);
+  --shadow-primary: 0 8px 24px rgba(var(--color-primary-rgb), 0.25);
+  --shadow-secondary: 0 8px 24px rgba(var(--color-secondary-rgb), 0.20);
 
   /* Transitions */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #fec89a 0%, #fec5bb 50%, #ffd7ba 100%);
-  --gradient-secondary: linear-gradient(135deg, #ffe5d9 0%, #fae1dd 50%, #f8edeb 100%);
-  --gradient-accent: linear-gradient(135deg, #ffd7ba 0%, #ffe5d9 100%);
-  --gradient-overlay: linear-gradient(180deg, rgba(254, 252, 251, 0) 0%, rgba(254, 252, 251, 0.8) 100%);
+  /* Gradients (terracotta to gold luxury) */
+  --gradient-primary: linear-gradient(135deg, #c45536 0%, #d4a574 100%);
+  --gradient-secondary: linear-gradient(135deg, #d4a574 0%, #f4c4a8 100%);
+  --gradient-accent: linear-gradient(135deg, #f4c4a8 0%, #f5e5d3 100%);
+  --gradient-surface: linear-gradient(180deg, #ffffff 0%, #fdfbf9 100%);
+  --gradient-overlay: linear-gradient(180deg, rgba(253, 251, 249, 0) 0%, rgba(253, 251, 249, 0.8) 100%);
 }
 
 * {
@@ -169,6 +177,132 @@ h2 {
   background-clip: text;
 }
 
+.gradient-text-primary {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-secondary {
+  background: var(--gradient-secondary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-stats {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glow effects for decorative orbs */
+.glow-orb-primary {
+  background: radial-gradient(circle, rgba(var(--color-primary-rgb), 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(30px);
+  pointer-events: none;
+}
+
+.glow-orb-secondary {
+  background: radial-gradient(circle, rgba(var(--color-secondary-rgb), 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(30px);
+  pointer-events: none;
+}
+
+.glow-orb-accent {
+  background: radial-gradient(circle, rgba(var(--color-accent-rgb), 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(30px);
+  pointer-events: none;
+}
+
+/* Background overlays */
+.bg-gradient-overlay {
+  background: radial-gradient(circle, rgba(var(--color-accent-rgb), 0.08) 0%, transparent 70%);
+}
+
+/* Color utilities */
+.color-primary {
+  color: var(--color-primary);
+}
+
+.color-secondary {
+  color: var(--color-secondary);
+}
+
 .text-balance {
   text-wrap: balance;
+}
+
+/* Feature Card Animated Gradient Border */
+.feature-card-gradient {
+  position: relative;
+  box-shadow: var(--shadow-md);
+}
+
+.feature-card-gradient::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: calc(var(--radius-lg) + 4px);
+  padding: 4px;
+  background: linear-gradient(
+    45deg,
+    var(--color-primary),
+    var(--color-secondary),
+    var(--color-accent),
+    var(--color-secondary),
+    var(--color-primary)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  z-index: -1;
+  background-size: 400% 400%;
+  animation: gradient-rotate 8s ease infinite;
+}
+
+.feature-card-gradient:hover::before {
+  opacity: 0.6;
+}
+
+.feature-card-gradient::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: calc(var(--radius-lg) + 4px);
+  background: linear-gradient(
+    45deg,
+    rgba(var(--color-primary-rgb), 0.15),
+    rgba(var(--color-secondary-rgb), 0.15),
+    rgba(var(--color-accent-rgb), 0.15),
+    rgba(var(--color-secondary-rgb), 0.15),
+    rgba(var(--color-primary-rgb), 0.15)
+  );
+  opacity: 0;
+  filter: blur(20px);
+  transition: opacity var(--transition-slow);
+  z-index: -2;
+  background-size: 400% 400%;
+  animation: gradient-rotate 8s ease infinite;
+}
+
+.feature-card-gradient:hover::after {
+  opacity: 1;
+}
+
+@keyframes gradient-rotate {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }

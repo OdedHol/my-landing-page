@@ -65,7 +65,7 @@
 .primary {
   background: var(--gradient-primary);
   color: white;
-  box-shadow: var(--shadow-peach);
+  box-shadow: var(--shadow-primary);
   border: 2px solid transparent;
 }
 
@@ -82,7 +82,7 @@
 .secondary {
   background: var(--color-secondary);
   color: white;
-  box-shadow: var(--shadow-blush);
+  box-shadow: var(--shadow-secondary);
   border: 2px solid transparent;
 }
 
@@ -108,7 +108,7 @@
   background: var(--color-primary);
   color: white;
   transform: translateY(-3px);
-  box-shadow: var(--shadow-peach);
+  box-shadow: var(--shadow-primary);
 }
 
 .outline:active:not(.disabled) {
@@ -128,7 +128,7 @@
 }
 
 .ghost:active:not(.disabled) {
-  background: var(--color-seashell);
+  background: var(--color-surface-secondary);
 }
 
 /* States */

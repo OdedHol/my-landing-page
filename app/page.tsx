@@ -4,9 +4,11 @@ import { useEffect, useRef } from 'react';
 import Button from '@/components/ui/Button';
 import Card, { CardHeader, CardBody, CardFooter } from '@/components/ui/Card';
 import List, { ListItem } from '@/components/ui/List';
-import Input, { TextArea, Select } from '@/components/ui/Input';
+import Input, { TextArea, Select, RestaurantIcon, TailoredIcon, GoldStarIcon } from '@/components/ui/Input';
 import Container, { Section, Grid } from '@/components/ui/Container';
 import { Display, Heading, Text, Badge } from '@/components/ui/Typography';
+import Logo from "@/public/logo.svg";
+import featureStyles from './FeatureCards.module.css';
 
 // Decorative SVG Components
 function FloatingOrb({ top, left, size = 200, delay = 0 }: { top: string; left: string; size?: number; delay?: number }) {
@@ -23,15 +25,16 @@ function FloatingOrb({ top, left, size = 200, delay = 0 }: { top: string; left: 
         animation: `float ${10 + delay}s ease-in-out infinite`,
         animationDelay: `${delay}s`,
         zIndex: 0,
+        color: 'var(--color-accent)',
       }}
       viewBox="0 0 200 200"
       xmlns="http://www.w3.org/2000/svg"
     >
       <defs>
         <linearGradient id={`grad-${delay}`} x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style={{ stopColor: '#fec89a', stopOpacity: 0.3 }} />
-          <stop offset="50%" style={{ stopColor: '#fec5bb', stopOpacity: 0.25 }} />
-          <stop offset="100%" style={{ stopColor: '#ffd7ba', stopOpacity: 0.2 }} />
+          <stop offset="0%" stopColor="currentColor" stopOpacity="0.3" />
+          <stop offset="50%" stopColor="currentColor" stopOpacity="0.25" />
+          <stop offset="100%" stopColor="currentColor" stopOpacity="0.2" />
         </linearGradient>
         <filter id={`blur-${delay}`}>
           <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
@@ -59,6 +62,7 @@ function WaveDecoration({ position = 'top' }: { position?: 'top' | 'bottom' }) {
         pointerEvents: 'none',
         transform: position === 'bottom' ? 'scaleY(-1)' : 'none',
         zIndex: 1,
+        color: 'var(--color-accent-light)',
       }}
       viewBox="0 0 1440 100"
       preserveAspectRatio="none"
@@ -66,9 +70,9 @@ function WaveDecoration({ position = 'top' }: { position?: 'top' | 'bottom' }) {
     >
       <defs>
         <linearGradient id={`wave-grad-${position}`} x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" style={{ stopColor: '#ffe5d9', stopOpacity: 0.3 }} />
-          <stop offset="50%" style={{ stopColor: '#fae1dd', stopOpacity: 0.5 }} />
-          <stop offset="100%" style={{ stopColor: '#f8edeb', stopOpacity: 0.3 }} />
+          <stop offset="0%" stopColor="currentColor" stopOpacity="0.3" />
+          <stop offset="50%" stopColor="currentColor" stopOpacity="0.5" />
+          <stop offset="100%" stopColor="currentColor" stopOpacity="0.3" />
         </linearGradient>
       </defs>
       <path
@@ -91,12 +95,13 @@ function DecorativePattern() {
         opacity: 0.02,
         pointerEvents: 'none',
         zIndex: 0,
+        color: 'var(--color-accent)',
       }}
       xmlns="http://www.w3.org/2000/svg"
     >
       <defs>
         <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-          <circle cx="20" cy="20" r="1.5" fill="#fec89a" />
+          <circle cx="20" cy="20" r="1.5" fill="currentColor" />
         </pattern>
       </defs>
       <rect width="100%" height="100%" fill="url(#dots)" />
@@ -117,6 +122,7 @@ function SparkleIcon({ delay = 0, top, left }: { delay?: number; top: string; le
         animationDelay: `${delay}s`,
         opacity: 0.6,
         pointerEvents: 'none',
+        color: 'var(--color-secondary)',
       }}
       viewBox="0 0 24 24"
       fill="none"
@@ -124,14 +130,8 @@ function SparkleIcon({ delay = 0, top, left }: { delay?: number; top: string; le
     >
       <path
         d="M12 0L13.5 8.5L22 10L13.5 11.5L12 20L10.5 11.5L2 10L10.5 8.5L12 0Z"
-        fill="url(#sparkle-gradient)"
+        fill="currentColor"
       />
-      <defs>
-        <linearGradient id="sparkle-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style={{ stopColor: '#fec89a' }} />
-          <stop offset="100%" style={{ stopColor: '#fec5bb' }} />
-        </linearGradient>
-      </defs>
     </svg>
   );
 }
@@ -141,6 +141,15 @@ export default function Home() {
   const featuresRef = useRef<HTMLElement>(null);
   const servicesRef = useRef<HTMLElement>(null);
   const benefitsRef = useRef<HTMLElement>(null);
+  const formRef = useRef<HTMLElement>(null);
+
+  const scrollToForm = () => {
+    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const scrollToFeatures = () => {
+    featuresRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   useEffect(() => {
     // Add keyframe animations to document
@@ -280,8 +289,8 @@ export default function Home() {
         right: 0;
         bottom: 0;
         background-image:
-          radial-gradient(circle at 20% 50%, rgba(254, 200, 154, 0.05) 0%, transparent 50%),
-          radial-gradient(circle at 80% 80%, rgba(254, 197, 187, 0.05) 0%, transparent 50%);
+          radial-gradient(circle at 20% 50%, rgba(var(--color-accent-rgb), 0.05) 0%, transparent 50%),
+          radial-gradient(circle at 80% 80%, rgba(var(--color-secondary-rgb), 0.05) 0%, transparent 50%);
         pointer-events: none;
         z-index: 0;
       }
@@ -330,16 +339,17 @@ export default function Home() {
             <div style={{ marginBottom: '2rem' }}>
               <Badge variant="secondary">Tel Aviv's Premier Food Concierge</Badge>
             </div>
-            <p style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '1.25rem', color: 'var(--color-text-primary)', letterSpacing: '0.02em' }}>
-              Syd&amp;Eats
-            </p>
-            <h1 style={{
+            {/* Logo instead of text */}
+            <img
+              src="/logo.svg"
+              alt="Syd&Eats Logo"
+              style={{ width: '200px', height: 'auto', margin: '0 auto 1.75rem' }}
+            />
+            
+            <h1 className="gradient-text-primary" style={{
               fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
               fontWeight: 700,
               marginBottom: '1.75rem',
-              background: 'linear-gradient(135deg, #fec89a 0%, #fec5bb 50%, #ffd7ba 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
               lineHeight: 1.15,
               maxWidth: '900px',
               margin: '0 auto 1.75rem'
@@ -361,11 +371,11 @@ export default function Home() {
               I'll book the restaurant, you show up hungry
             </Text>
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Button variant="secondary" size="large">
-                Get Started
+              <Button variant="secondary" size="large" onClick={scrollToForm}>
+                Plan My Dining
               </Button>
-              <Button variant="outline" size="large">
-                Learn More
+              <Button variant="outline" size="large" onClick={scrollToFeatures}>
+                See How It Works
               </Button>
             </div>
           </div>
@@ -376,13 +386,14 @@ export default function Home() {
 
       {/* Features Section */}
       <Section
+        ref={featuresRef}
         background="surface"
         padding="large"
         style={{
           position: 'relative',
           paddingTop: '8rem',
           paddingBottom: '8rem',
-          background: 'linear-gradient(180deg, #ffffff 0%, #fef9f8 100%)',
+          background: 'var(--gradient-surface)',
         }}
       >
         <Container size="medium">
@@ -395,114 +406,273 @@ export default function Home() {
             </Text>
           </div>
 
-          <Grid columns={3} gap="large" style={{ position: 'relative', zIndex: 1 }}>
+          <div className={featureStyles.featuresContainer}>
+            {/* Card 1 - Restaurant Booking */}
+            <div className={`${featureStyles.featureCardWrapper} animate-scale stagger-1`}>
+              <div className={`${featureStyles.featureCard} feature-card-gradient`}>
+                <div className={`${featureStyles.glowOrb} glow-orb-accent`} />
+                <div className={featureStyles.cardContent}>
+                  <div className={featureStyles.iconContainer}>
+                    <RestaurantIcon size={40} />
+                  </div>
+                  <h3 className={featureStyles.cardTitle}>
+                    Restaurant Booking
+                  </h3>
+                  <p className={featureStyles.cardSubtitle}>
+                    Premium reservations
+                  </p>
+                  <p className={featureStyles.cardDescription}>
+                    Access to Tel Aviv's most exclusive restaurants. We handle the reservations, you enjoy the experience.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 2 - Curated Selection */}
+            <div className={`${featureStyles.featureCardWrapper} animate-scale stagger-2`}>
+              <div className={`${featureStyles.featureCard} feature-card-gradient`}>
+                <div className={`${featureStyles.glowOrb} glow-orb-secondary`} />
+                <div className={featureStyles.cardContent}>
+                  <div className={featureStyles.iconContainer}>
+                    <TailoredIcon size={40} />
+                  </div>
+                  <h3 className={featureStyles.cardTitle}>
+                    Curated Selection
+                  </h3>
+                  <p className={featureStyles.cardSubtitle}>
+                    Personalized recommendations
+                  </p>
+                  <p className={featureStyles.cardDescription}>
+                    Handpicked dining experiences tailored to your preferences and dietary requirements.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 3 - VIP Treatment */}
+            <div className={`${featureStyles.featureCardWrapper} animate-scale stagger-3`}>
+              <div className={`${featureStyles.featureCard} feature-card-gradient`}>
+                <div className={`${featureStyles.glowOrb} glow-orb-accent`} />
+                <div className={featureStyles.cardContent}>
+                  <div className={featureStyles.iconContainer}>
+                    <GoldStarIcon size={40} />
+                  </div>
+                  <h3 className={featureStyles.cardTitle}>
+                    VIP Treatment
+                  </h3>
+                  <p className={featureStyles.cardSubtitle}>
+                    Exclusive access
+                  </p>
+                  <p className={featureStyles.cardDescription}>
+                    Skip the wait and enjoy priority seating at the city's hottest culinary destinations.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </Section>
+
+      {/* Success Metrics */}
+      <Section
+        background="default"
+        padding="large"
+        style={{
+          paddingTop: '6rem',
+          paddingBottom: '6rem',
+        }}
+      >
+        <Container size="medium">
+          <Grid columns={3} gap="large">
+            <div className="animate-scale stagger-1" style={{ textAlign: 'center' }}>
+              <div className="gradient-text-stats" style={{
+                fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
+                fontWeight: 700,
+                marginBottom: '0.5rem',
+              }}>
+                500+
+              </div>
+              <Text color="secondary" style={{ fontWeight: 600, fontSize: '1.125rem' }}>
+                Dining Experiences Curated
+              </Text>
+            </div>
+
+            <div className="animate-scale stagger-2" style={{ textAlign: 'center' }}>
+              <div className="gradient-text-stats" style={{
+                fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
+                fontWeight: 700,
+                marginBottom: '0.5rem',
+              }}>
+                50+
+              </div>
+              <Text color="secondary" style={{ fontWeight: 600, fontSize: '1.125rem' }}>
+                Partner Restaurants
+              </Text>
+            </div>
+
+            <div className="animate-scale stagger-3" style={{ textAlign: 'center' }}>
+              <div className="gradient-text-stats" style={{
+                fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
+                fontWeight: 700,
+                marginBottom: '0.5rem',
+              }}>
+                98%
+              </div>
+              <Text color="secondary" style={{ fontWeight: 600, fontSize: '1.125rem' }}>
+                Client Satisfaction Rate
+              </Text>
+            </div>
+          </Grid>
+        </Container>
+      </Section>
+
+      {/* Benefits Checklist */}
+      <Section
+        background="surface"
+        padding="large"
+        style={{
+          background: 'var(--gradient-surface)',
+          paddingTop: '8rem',
+          paddingBottom: '8rem',
+          position: 'relative',
+        }}
+      >
+        <Container size="small">
+          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+            <Heading level={2} className="animate-on-scroll" style={{ fontSize: 'clamp(2.25rem, 4vw, 2.75rem)', marginBottom: '1.25rem', fontWeight: 700 }}>
+              What You Get
+            </Heading>
+            <Text variant="lead" color="secondary" align="center" className="animate-on-scroll stagger-1" style={{ maxWidth: '620px', margin: '0 auto', fontSize: '1.125rem', lineHeight: 1.7 }}>
+              A comprehensive concierge service designed to elevate every dining moment
+            </Text>
+          </div>
+
+          <div
+            className="animate-scale stagger-2"
+            style={{
+              background: 'white',
+              borderRadius: 'var(--radius-xl)',
+              padding: 'clamp(2rem, 4vw, 3.5rem)',
+              boxShadow: 'var(--shadow-lg)',
+              border: '1px solid var(--color-border-light)',
+            }}
+          >
+            <List variant="checklist">
+              <ListItem title="Guaranteed reservations at top Tel Aviv restaurants" />
+              <ListItem title="Personalized dining recommendations based on your taste" />
+              <ListItem title="Priority access and preferred seating arrangements" />
+              <ListItem title="Special occasion coordination and surprises" />
+              <ListItem title="Dietary accommodation and menu consultation" />
+              <ListItem title="Flexible rescheduling and cancellation support" />
+            </List>
+          </div>
+        </Container>
+      </Section>
+
+      {/* Testimonials */}
+      <Section
+        background="default"
+        padding="large"
+        style={{
+          paddingTop: '8rem',
+          paddingBottom: '8rem',
+          position: 'relative',
+        }}
+      >
+        <Container size="medium">
+          <div style={{ textAlign: 'center', marginBottom: '5rem' }}>
+            <Heading level={2} className="animate-on-scroll" style={{ fontSize: 'clamp(2.25rem, 4vw, 2.75rem)', marginBottom: '1.25rem', fontWeight: 700 }}>
+              What Our Clients Say
+            </Heading>
+            <Text variant="lead" color="secondary" align="center" className="animate-on-scroll stagger-1" style={{ fontSize: '1.125rem', lineHeight: 1.7 }}>
+              Real experiences from travelers who trusted us with their Tel Aviv dining
+            </Text>
+          </div>
+
+          <Grid columns={3} gap="large">
             <div className="animate-scale stagger-1">
               <Card
-                variant="feature"
-                hoverable
+                variant="elevated"
                 style={{
                   height: '100%',
                   background: '#ffffff',
                   border: '1px solid var(--color-border-light)',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  boxShadow: '0 4px 20px rgba(252, 213, 206, 0.12)',
+                  boxShadow: 'var(--shadow-md)',
                 }}
               >
-                <div style={{
-                  position: 'absolute',
-                  top: '-30%',
-                  right: '-15%',
-                  width: '160px',
-                  height: '160px',
-                  background: 'radial-gradient(circle, rgba(254, 200, 154, 0.15) 0%, transparent 70%)',
-                  borderRadius: '50%',
-                  filter: 'blur(30px)',
-                  pointerEvents: 'none',
-                }} />
-                <CardHeader
-                  icon="🍽️"
-                  title="Restaurant Booking"
-                  subtitle="Premium reservations"
-                />
                 <CardBody>
-                  <Text color="secondary" style={{ fontSize: '1rem', lineHeight: 1.7, color: 'var(--color-text-secondary)' }}>
-                    Access to Tel Aviv's most exclusive restaurants. We handle the reservations, you enjoy the experience.
+                  <div style={{ marginBottom: '1.5rem' }}>
+                    <Text style={{ fontSize: '1.875rem', lineHeight: 1, color: 'var(--color-secondary)' }}>★★★★★</Text>
+                  </div>
+                  <Text color="secondary" style={{ fontSize: '1rem', lineHeight: 1.7, marginBottom: '1.5rem', fontStyle: 'italic' }}>
+                    "Sydney made our anniversary trip unforgettable. She knew exactly which restaurants matched our vibe and dietary needs. Every meal was perfection!"
                   </Text>
+                  <div>
+                    <Text style={{ fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: '0.25rem' }}>
+                      Rachel & David
+                    </Text>
+                    <Text variant="small" color="light" style={{ fontSize: '0.875rem' }}>
+                      New York, USA
+                    </Text>
+                  </div>
                 </CardBody>
               </Card>
             </div>
 
             <div className="animate-scale stagger-2">
               <Card
-                variant="feature"
-                hoverable
+                variant="elevated"
                 style={{
                   height: '100%',
                   background: '#ffffff',
                   border: '1px solid var(--color-border-light)',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  boxShadow: '0 4px 20px rgba(252, 213, 206, 0.12)',
+                  boxShadow: 'var(--shadow-md)',
                 }}
               >
-                <div style={{
-                  position: 'absolute',
-                  top: '-30%',
-                  right: '-15%',
-                  width: '160px',
-                  height: '160px',
-                  background: 'radial-gradient(circle, rgba(254, 197, 187, 0.15) 0%, transparent 70%)',
-                  borderRadius: '50%',
-                  filter: 'blur(30px)',
-                  pointerEvents: 'none',
-                }} />
-                <CardHeader
-                  icon="👨‍🍳"
-                  title="Curated Selection"
-                  subtitle="Personalized recommendations"
-                />
                 <CardBody>
-                  <Text color="secondary" style={{ fontSize: '1rem', lineHeight: 1.7, color: 'var(--color-text-secondary)' }}>
-                    Handpicked dining experiences tailored to your preferences and dietary requirements.
+                  <div style={{ marginBottom: '1.5rem' }}>
+                    <Text style={{ fontSize: '1.875rem', lineHeight: 1, color: 'var(--color-secondary)' }}>★★★★★</Text>
+                  </div>
+                  <Text color="secondary" style={{ fontSize: '1rem', lineHeight: 1.7, marginBottom: '1.5rem', fontStyle: 'italic' }}>
+                    "As a first-time visitor to Tel Aviv, I had no idea where to eat. Syd&Eats handled everything perfectly. Got tables at places I'd never have found on my own!"
                   </Text>
+                  <div>
+                    <Text style={{ fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: '0.25rem' }}>
+                      Michael Chen
+                    </Text>
+                    <Text variant="small" color="light" style={{ fontSize: '0.875rem' }}>
+                      San Francisco, USA
+                    </Text>
+                  </div>
                 </CardBody>
               </Card>
             </div>
 
             <div className="animate-scale stagger-3">
               <Card
-                variant="feature"
-                hoverable
+                variant="elevated"
                 style={{
                   height: '100%',
                   background: '#ffffff',
                   border: '1px solid var(--color-border-light)',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  boxShadow: '0 4px 20px rgba(252, 213, 206, 0.12)',
+                  boxShadow: 'var(--shadow-md)',
                 }}
               >
-                <div style={{
-                  position: 'absolute',
-                  top: '-30%',
-                  right: '-15%',
-                  width: '160px',
-                  height: '160px',
-                  background: 'radial-gradient(circle, rgba(255, 215, 186, 0.15) 0%, transparent 70%)',
-                  borderRadius: '50%',
-                  filter: 'blur(30px)',
-                  pointerEvents: 'none',
-                }} />
-                <CardHeader
-                  icon="⭐"
-                  title="VIP Treatment"
-                  subtitle="Exclusive access"
-                />
                 <CardBody>
-                  <Text color="secondary" style={{ fontSize: '1rem', lineHeight: 1.7, color: 'var(--color-text-secondary)' }}>
-                    Skip the wait and enjoy priority seating at the city's hottest culinary destinations.
+                  <div style={{ marginBottom: '1.5rem' }}>
+                    <Text style={{ fontSize: '1.875rem', lineHeight: 1, color: 'var(--color-secondary)' }}>★★★★★</Text>
+                  </div>
+                  <Text color="secondary" style={{ fontSize: '1rem', lineHeight: 1.7, marginBottom: '1.5rem', fontStyle: 'italic' }}>
+                    "Worth every penny. Sydney's recommendations were spot-on for our group's diverse tastes. She even coordinated a surprise birthday dessert!"
                   </Text>
+                  <div>
+                    <Text style={{ fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: '0.25rem' }}>
+                      Sarah & Emma
+                    </Text>
+                    <Text variant="small" color="light" style={{ fontSize: '0.875rem' }}>
+                      London, UK
+                    </Text>
+                  </div>
                 </CardBody>
               </Card>
             </div>
@@ -512,6 +682,7 @@ export default function Home() {
 
       {/* Services List with Form */}
       <Section
+        ref={formRef}
         background="default"
         padding="large"
         className="premium-texture"
@@ -560,16 +731,14 @@ export default function Home() {
             </div>
 
             <div className="animate-right" style={{ position: 'relative' }}>
-              <div style={{
+              <div className="bg-gradient-overlay" style={{
                 position: 'absolute',
                 top: '-10%',
                 left: '-10%',
                 width: '120%',
                 height: '120%',
-                background: 'radial-gradient(circle, rgba(254, 200, 154, 0.08) 0%, transparent 70%)',
                 borderRadius: '50%',
                 filter: 'blur(60px)',
-                pointerEvents: 'none',
                 zIndex: 0,
               }} />
               <Card
@@ -577,11 +746,11 @@ export default function Home() {
                 style={{
                   position: 'relative',
                   zIndex: 1,
-                  boxShadow: '0 12px 48px rgba(254, 200, 154, 0.18), 0 0 1px rgba(0,0,0,0.05)',
+                  boxShadow: 'var(--shadow-primary)',
                   border: '1px solid var(--color-border-light)',
                 }}
               >
-                <CardHeader title="Book Your Experience" />
+                <CardHeader title="Plan Your Tel Aviv Dining" />
                 <CardBody>
                   <Input
                     label="Name"
@@ -617,119 +786,12 @@ export default function Home() {
                 </CardBody>
                 <CardFooter>
                   <Button variant="secondary" fullWidth size="large">
-                    Request Reservation
+                    Start Planning
                   </Button>
                 </CardFooter>
               </Card>
             </div>
           </Grid>
-        </Container>
-      </Section>
-
-      {/* Benefits Checklist */}
-      <Section
-        background="surface"
-        padding="large"
-        style={{
-          background: 'linear-gradient(180deg, #fef9f8 0%, #ffffff 100%)',
-          paddingTop: '8rem',
-          paddingBottom: '8rem',
-          position: 'relative',
-        }}
-      >
-        <Container size="small">
-          <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <Heading level={2} className="animate-on-scroll" style={{ fontSize: 'clamp(2.25rem, 4vw, 2.75rem)', marginBottom: '1.25rem', fontWeight: 700 }}>
-              What You Get
-            </Heading>
-            <Text variant="lead" color="secondary" align="center" className="animate-on-scroll stagger-1" style={{ maxWidth: '620px', margin: '0 auto', fontSize: '1.125rem', lineHeight: 1.7 }}>
-              A comprehensive concierge service designed to elevate every dining moment
-            </Text>
-          </div>
-
-          <div
-            className="animate-scale stagger-2"
-            style={{
-              background: 'white',
-              borderRadius: 'var(--radius-xl)',
-              padding: 'clamp(2rem, 4vw, 3.5rem)',
-              boxShadow: '0 8px 32px rgba(252, 213, 206, 0.12)',
-              border: '1px solid var(--color-border-light)',
-            }}
-          >
-            <List variant="checklist">
-              <ListItem title="Guaranteed reservations at top Tel Aviv restaurants" />
-              <ListItem title="Personalized dining recommendations based on your taste" />
-              <ListItem title="Priority access and preferred seating arrangements" />
-              <ListItem title="Special occasion coordination and surprises" />
-              <ListItem title="Dietary accommodation and menu consultation" />
-              <ListItem title="Flexible rescheduling and cancellation support" />
-            </List>
-          </div>
-        </Container>
-      </Section>
-
-      {/* CTA Section */}
-      <Section
-        background="accent"
-        padding="large"
-        style={{
-          background: 'linear-gradient(135deg, #fec89a 0%, #fec5bb 50%, #ffd7ba 100%)',
-          paddingTop: '7rem',
-          paddingBottom: '7rem',
-          position: 'relative',
-          overflow: 'hidden',
-        }}
-      >
-        <div style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: '800px',
-          height: '800px',
-          background: 'radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%)',
-          borderRadius: '50%',
-          filter: 'blur(80px)',
-          pointerEvents: 'none',
-        }} />
-
-        <Container size="small">
-          <div style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
-            <Heading level={2} className="animate-on-scroll" style={{ color: 'white', fontSize: 'clamp(2.25rem, 4vw, 3rem)', marginBottom: '1.5rem', textShadow: '0 2px 20px rgba(0,0,0,0.1)', fontWeight: 700 }}>
-              Ready to Elevate Your Dining?
-            </Heading>
-            <Text
-              variant="lead"
-              className="animate-on-scroll stagger-1"
-              style={{
-                color: 'rgba(255, 255, 255, 0.95)',
-                marginBottom: '3rem',
-                fontSize: '1.125rem',
-                lineHeight: 1.7,
-                textShadow: '0 1px 10px rgba(0,0,0,0.05)',
-                maxWidth: '640px',
-                margin: '0 auto 3rem',
-              }}
-            >
-              Let Sydney Wolff handle the details while you focus on what matters—great food and
-              great company.
-            </Text>
-            <div className="animate-scale stagger-2">
-              <Button
-                variant="primary"
-                size="large"
-                style={{
-                  background: 'white',
-                  color: 'var(--color-text-primary)',
-                  boxShadow: '0 8px 32px rgba(0,0,0,0.15)',
-                  fontWeight: 600,
-                }}
-              >
-                Start Your Journey
-              </Button>
-            </div>
-          </div>
         </Container>
       </Section>
 

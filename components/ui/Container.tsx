@@ -21,19 +21,19 @@ interface SectionProps {
   style?: React.CSSProperties;
 }
 
-export function Section({
+export const Section = React.forwardRef<HTMLElement, SectionProps>(({
   children,
   background = 'default',
   padding = 'large',
   className = '',
   style,
-}: SectionProps) {
+}, ref) => {
   const classes = [styles.section, styles[`bg-${background}`], styles[`padding-${padding}`], className]
     .filter(Boolean)
     .join(' ');
 
-  return <section className={classes} style={style}>{children}</section>;
-}
+  return <section ref={ref} className={classes} style={style}>{children}</section>;
+});
 
 interface GridProps {
   children: React.ReactNode;

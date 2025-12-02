@@ -73,6 +73,8 @@
 .grid {
   display: grid;
   width: 100%;
+  justify-items: stretch;
+  align-items: stretch;
 }
 
 /* Grid columns */
